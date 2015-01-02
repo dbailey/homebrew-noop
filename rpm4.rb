@@ -129,3 +129,24 @@ index f3b1bab..bf264f5 100644
    { if ((__progname = strrchr(pn, '/')) != NULL) __progname++; \
      else __progname = pn;		\
    }
+diff --git a/lib/header.c b/lib/header.c
+index b24d16e..0fd814a 100644
+--- a/lib/header.c
++++ b/lib/header.c
+@@ -101,6 +101,7 @@ static const size_t headerMaxbytes = (32*1024*1024);
+ 	(((_e)->info.tag >= RPMTAG_HEADERIMAGE) && ((_e)->info.tag < RPMTAG_HEADERREGIONS))
+ #define	ENTRY_IN_REGION(_e)	((_e)->info.offset < 0)
+ 
++#ifndef HTONLL
+ /* Convert a 64bit value to network byte order. */
+ RPM_GNUC_CONST
+ static uint64_t htonll(uint64_t n)
+@@ -111,6 +112,7 @@ static uint64_t htonll(uint64_t n)
+     i[1] = htonl(b);
+     return n;
+ }
++#endif
+ 
+ Header headerLink(Header h)
+ {
+
